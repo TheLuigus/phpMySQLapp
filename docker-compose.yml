@@ -1,0 +1,17 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.39
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d/:ro
+    hostname: mysql
+  webserver:
+    image: sohmc/php-mysqli:8.3.11-apache
+    container_name: webserver
+    volumes:
+      - ./src:/var/www/html:ro
+    ports:
+      - "80:80"
