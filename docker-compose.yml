@@ -1,15 +1,16 @@
 version: '3'
 services:
-  mysql:
+  siteDB:
     image: mysql:8.0.39
-    container_name: mysql
+    container_name: siteDB
     environment:
       MYSQL_ROOT_PASSWORD: admin
     volumes:
       - ./sql:/docker-entrypoint-initdb.d/:ro
-    hostname: mysql
+    hostname: siteDB
   webserver:
     image: sohmc/php-mysqli:8.3.11-apache
+    # build: ./src
     container_name: webserver
     volumes:
       - ./src:/var/www/html:ro
