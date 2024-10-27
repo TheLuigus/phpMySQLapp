@@ -9,10 +9,14 @@ services:
       - ./sql:/docker-entrypoint-initdb.d/:ro
     hostname: siteDB
   webserver:
-    image: sohmc/php-mysqli:8.3.11-apache
-    # build: ./src
+    # image: sohmc/php-mysqli:8.3.11-apache
+    build: ./src
     container_name: webserver
-    volumes:
-      - ./src:/var/www/html:ro
+    environment:
+      DB_HOST: "siteDB"
+      DB_USER: "root"
+      DB_PASS: "admin"
+    # volumes:
+    #   - ./src:/var/www/html:ro
     ports:
       - "80:80"
